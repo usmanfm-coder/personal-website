@@ -3,7 +3,7 @@ date: '2024-11-22'
 title: 'Software Engineer'
 company: 'McKinsey & Company'
 location: 'Houston, TX'
-range: 'May 2023 - May 2024'
+range: '2023 - 2024'
 url: 'https://www.mckinsey.com/'
 ---
 - Led the development of a groundbreaking MVP powered by Generative AI, achieving ~$50M in savings by streamlining insurance contract processes.

@@ -3,7 +3,7 @@ date: '2024-11-23'
 title: 'Software Engineer'
 company: 'Proof'
 location: 'Remote'
-range: 'May 2024 - Dec 2024'
+range: '2024 - 2024'
 url: 'https://www.proofserve.com/'
 ---
 - Led the development of an in-app notification hub using React Native and TypeScript, enabling 5,000+ users to track past and current notifications, resulting in a 30% increase in user engagement.

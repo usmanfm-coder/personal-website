@@ -3,7 +3,7 @@ date: '2024-11-20'
 title: 'Software Engineer'
 company: 'Telus'
 location: 'Remote'
-range: 'May 2021 - Aug 2021'
+range: '2021 - 2021'
 url: 'https://www.telus.com/en'
 ---
 - Engineered a web application using Node.js, React.js, and TypeScript, boosting user engagement and streamlining functionality for nationwide teams.

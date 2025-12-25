@@ -3,12 +3,13 @@ date: '2024-11-21'
 title: 'Software Engineer'
 company: 'Yelp'
 location: 'Remote'
-range: 'Aug 2021 - May 2023'
+range: '2021 - 2023'
 url: 'https://www.yelp.com/'
 ---
-- Built scalable services, APIs, and frontend components leveraging large datasets, driving a $10M+ annual revenue increase by improving customer support value measurement.
-- Developed premium support tools for businesses, boosting customer retention (10% YoY).
-- Designed and implemented A/B tests and feature rollouts, optimizing key business metrics and enabling data-driven strategic decisions.
-- Led cross-functional projects with Product, Design, Marketing, and Data Science teams to deliver impactful, user-focused solutions.
-- Reduced system downtime by swiftly identifying and resolving production issues during on-call rotations, ensuring high system reliability and minimal user disruption.
-- Orchestrated a welcoming initiative that successfully onboarded over 100 new members at Yelp remotely.
+- Full Stack engineer at Yelp building a world-class customer support experience for local businesses.
+- Building services, API’s, and reusable frontend components which ingest various large datasets to measure and report the value of Yelp customer support to business owners.
+- Developing suite of tools which allow businesses to access a premium customer support experience to improve retention.
+- Design, plan, and execute data-driven experiments driving key metrics across our business
+- Led various projects and collaborated closely with Product/Design/Marketing/Data Science to scope projects.
+- Project lead, project scoping, LOE estimates (roadmap planning), incident response
+- Regular mentor to new hires, engineers, etc.. 

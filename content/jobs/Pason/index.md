@@ -3,7 +3,7 @@ date: '2024-11-19'
 title: 'Software Intern'
 company: 'Pason'
 location: 'Calgary, AB'
-range: 'May 2019 - Aug 2020'
+range: '2019 - 2020'
 url: 'https://www.pason.com/'
 ---
 - Designed and implemented an automated reporting system in collaboration with Drilling Optimization Engineers, delivering 50+ daily reports used as critical business metrics by clients.
