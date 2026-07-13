@@ -8,8 +8,8 @@ const StyledFooter = styled.footer`
   ${({ theme }) => theme.mixins.flexCenter};
   flex-direction: column;
   height: auto;
-  min-height: 70px;
-  padding: 15px;
+  min-height: 120px;
+  padding: 24px 15px 32px;
   text-align: center;
 `;
 
@@ -44,10 +44,19 @@ const StyledCredit = styled.div`
   color: var(--light-slate);
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
-  line-height: 1;
+  line-height: 1.6;
+  max-width: 720px;
 
   a {
     padding: 10px;
+  }
+
+  .footer-note {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .github-stats {
@@ -104,8 +113,9 @@ const Footer = () => {
         </ul>
       </StyledSocialLinks>
 
-      <StyledCredit tabindex="-1">
+      <StyledCredit tabIndex="-1">
         <a href="https://github.com/bFarooq7/v4">
+          <span className="footer-note">Open to product-first engineering work</span>
           <div>Designed &amp; Built by Usman Farooq</div>
 
           {githubInfo.stars && githubInfo.forks && (

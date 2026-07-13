@@ -6,12 +6,12 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledAboutSection = styled.section`
-  max-width: 900px;
+  max-width: 1100px;
 
   .inner {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 50px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
 
     @media (max-width: 768px) {
       display: block;
@@ -19,10 +19,65 @@ const StyledAboutSection = styled.section`
   }
 `;
 const StyledText = styled.div`
+  .story-block {
+    padding: 28px;
+    border: 1px solid rgba(136, 146, 176, 0.14);
+    border-radius: 24px;
+    background: rgba(17, 34, 64, 0.45);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px -34px rgba(2, 12, 27, 1);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .story-card {
+    padding: 18px;
+    border: 1px solid rgba(136, 146, 176, 0.14);
+    border-radius: 18px;
+    background: rgba(2, 12, 27, 0.2);
+  }
+
+  .story-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xxs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .story-value {
+    display: block;
+    color: var(--white);
+    font-size: var(--fz-xl);
+    line-height: 1.2;
+  }
+
+  .story-copy {
+    color: var(--light-slate);
+  }
+
+  .personal-note {
+    padding-top: 8px;
+    margin-top: 24px;
+    border-top: 1px solid rgba(136, 146, 176, 0.14);
+  }
+
   ul.skills-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    grid-gap: 0 10px;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 0 10px;
     padding: 0;
     margin: 20px 0 0 0;
     overflow: hidden;
@@ -124,6 +179,28 @@ const About = () => {
   }, []);
 
   const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Node.js', 'Python', 'React Native', 'Go', 'GraphQL'];
+  const impactStats = [
+    {
+      label: 'Generative AI MVP',
+      value: '$50M savings',
+      copy: 'Streamlined insurance contract workflows with a breakthrough AI-powered MVP.',
+    },
+    {
+      label: 'Delivery speed',
+      value: '15% faster',
+      copy: 'Architected scalable systems for Fortune 500 clients in med-tech and insurance.',
+    },
+    {
+      label: 'Team leadership',
+      value: '6 engineers',
+      copy: 'Managed and mentored a team that improved productivity by 25%.',
+    },
+    {
+      label: 'Craft focus',
+      value: 'Full stack',
+      copy: 'Balanced product thinking, technical delivery, and a strong eye for detail.',
+    },
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -131,23 +208,39 @@ const About = () => {
 
       <div className="inner">
         <StyledText>
-          <div>
+          <div className="story-block">
             <p>
-              Hello! My name is Usman and I enjoy creating things that live on the internet. My
-              interest in software development started back in 2014 when I decided to take a computer science
-              elective because my friend pressured me into taking it. It was supposed to be an "easy A". Turns out 
-              that is where my passion is and how I want to make an impact in the world.
+              Hello! My name is Usman and I enjoy creating things that live on the internet. What
+              started as a computer science elective in 2014 quickly turned into a long-term
+              obsession with building products that are useful, fast, and thoughtfully designed.
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">a telecom company</a>,{' '}
-              <a href="https://us.mullenlowe.com/">a massive consulting firm</a>, and{' '}
-              <a href="https://starry.com/">a start-up.</a> My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://yelp.com/">Yelp</a> for a variety of
-              customers.
+              Fast-forward to today, and I’ve had the privilege of working across telecom,
+              consulting, startups, and enterprise software. These days I’m focused on building
+              customer-facing software at <a href="https://rippling.com/">Rippling</a>, while
+              also leading teams and shaping technical delivery end to end.
             </p>
+
+            <p>Here’s a snapshot of the kind of work I tend to gravitate toward:</p>
+
+            <div className="story-grid">
+              {impactStats.map(stat => (
+                <div className="story-card" key={stat.label}>
+                  <span className="story-label">{stat.label}</span>
+                  <span className="story-value">{stat.value}</span>
+                  <p className="story-copy">{stat.copy}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="personal-note">
+              <p>
+                Outside of work, I’m usually drawn to a mix of design, clean systems, good
+                conversations, and the small details that make products feel alive. I like staying
+                close to the work, close to the user, and close to the team.
+              </p>
+            </div>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
