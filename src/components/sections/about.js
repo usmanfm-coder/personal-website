@@ -235,6 +235,7 @@ const About = () => {
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
+      <span className="chapter-kicker">Chapter One</span>
       <h2 className="numbered-heading">About Me</h2>
 
       <div className="inner">

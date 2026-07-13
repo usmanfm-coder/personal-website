@@ -244,6 +244,7 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs" ref={revealContainer}>
+      <span className="chapter-kicker">Chapter Four</span>
       <h2 className="numbered-heading">Where I’ve Worked</h2>
 
       <div className="inner">

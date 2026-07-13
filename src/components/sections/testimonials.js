@@ -94,6 +94,7 @@ const Testimonials = () => {
 
   return (
     <StyledTestimonialsSection id="testimonials" ref={revealContainer}>
+      <span className="chapter-kicker">Chapter Two</span>
       <h2 className="numbered-heading">What People Say</h2>
       <p className="intro">
         I like building strong working relationships, and I’m grateful to have a track record of

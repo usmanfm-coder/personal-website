@@ -176,8 +176,9 @@ const GlobalStyle = createGlobalStyle`
 
   section {
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 120px 0;
     max-width: 1000px;
+    position: relative;
 
     @media (max-width: 768px) {
       padding: 80px 0;
@@ -185,6 +186,18 @@ const GlobalStyle = createGlobalStyle`
 
     @media (max-width: 480px) {
       padding: 60px 0;
+    }
+
+    &:not(:first-of-type):before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(180px, 28vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.55), transparent);
+      opacity: 0.75;
     }
   }
 
@@ -255,6 +268,25 @@ const GlobalStyle = createGlobalStyle`
       @media (max-width: 600px) {
         margin-left: 10px;
       }
+    }
+  }
+
+  .chapter-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    &:before {
+      content: '';
+      width: 42px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--green), transparent);
     }
   }
 

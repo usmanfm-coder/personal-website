@@ -71,6 +71,7 @@ const Contact = () => {
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
       <div className="contact-card">
+        <span className="chapter-kicker">Chapter Five</span>
         <h2 className="numbered-heading overline">What’s Next?</h2>
 
         <h2 className="title">Get In Touch</h2>
