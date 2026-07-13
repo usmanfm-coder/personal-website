@@ -32,7 +32,12 @@ const StyledProject = styled.li`
   background: linear-gradient(180deg, rgba(17, 34, 64, 0.78), rgba(10, 25, 47, 0.88));
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 60px -36px rgba(2, 12, 27, 0.95);
-  transition: transform 0.25s var(--easing), border-color 0.25s var(--easing), box-shadow 0.25s var(--easing);
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--lift, 0px));
+  transition:
+    transform 0.2s var(--easing),
+    border-color 0.25s var(--easing),
+    box-shadow 0.25s var(--easing);
 
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.boxShadow};
@@ -109,7 +114,7 @@ const StyledProject = styled.li`
   &:hover {
     border-color: rgba(100, 255, 218, 0.2);
     box-shadow: 0 28px 70px -34px rgba(2, 12, 27, 1);
-    transform: translateY(-6px);
+    --lift: -6px;
   }
 
   &:nth-of-type(3n + 1) {
@@ -414,6 +419,43 @@ const Featured = () => {
     sr.reveal(revealTitle.current, srConfig());
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
+
+    const cards = revealProjects.current.filter(Boolean);
+    const handlers = [];
+
+    cards.forEach(card => {
+      const handleMove = event => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--tilt-y', `${x * 6}deg`);
+        card.style.setProperty('--tilt-x', `${y * -6}deg`);
+        card.style.setProperty('--lift', '-8px');
+      };
+
+      const handleLeave = () => {
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--lift', '0px');
+      };
+
+      card.addEventListener('mousemove', handleMove);
+      card.addEventListener('mouseleave', handleLeave);
+      handlers.push({ card, handleMove, handleLeave });
+    });
+
+    return () => {
+      handlers.forEach(({ card, handleMove, handleLeave }) => {
+        card.removeEventListener('mousemove', handleMove);
+        card.removeEventListener('mouseleave', handleLeave);
+      });
+    };
+  }, [prefersReducedMotion]);
 
   return (
     <section id="projects">

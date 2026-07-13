@@ -129,8 +129,17 @@ const StyledLinks = styled.div`
       counter-increment: item 1;
       font-size: var(--fz-xs);
 
+      &.active a {
+        color: var(--green);
+
+        &:after {
+          width: 100%;
+        }
+      }
+
       a {
         padding: 10px;
+        position: relative;
 
         &:before {
           content: '0' counter(item) '.';
@@ -138,6 +147,18 @@ const StyledLinks = styled.div`
           color: var(--green);
           font-size: var(--fz-xxs);
           text-align: right;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          bottom: 6px;
+          height: 1px;
+          width: 0;
+          background: linear-gradient(90deg, var(--green), rgba(100, 255, 218, 0));
+          transition: width 0.25s var(--easing);
         }
       }
     }
@@ -154,6 +175,7 @@ const Nav = ({ isHome }) => {
   const [isMounted, setIsMounted] = useState(!isHome);
   const scrollDirection = useScrollDirection('down');
   const [scrolledToTop, setScrolledToTop] = useState(true);
+  const [activeSection, setActiveSection] = useState('about');
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleScroll = () => {
@@ -170,6 +192,35 @@ const Nav = ({ isHome }) => {
     }, 100);
 
     window.addEventListener('scroll', handleScroll);
+
+    const sections = ['about', 'testimonials', 'jobs', 'contact']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    if (sections.length) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setActiveSection(entry.target.id);
+            }
+          });
+        },
+        {
+          rootMargin: '-20% 0px -65% 0px',
+          threshold: 0.1,
+        },
+      );
+
+      sections.forEach(section => observer.observe(section));
+
+      return () => {
+        clearTimeout(timeout);
+        window.removeEventListener('scroll', handleScroll);
+        sections.forEach(section => observer.unobserve(section));
+        observer.disconnect();
+      };
+    }
 
     return () => {
       clearTimeout(timeout);
@@ -222,7 +273,7 @@ const Nav = ({ isHome }) => {
               <ol>
                 {navLinks &&
                   navLinks.map(({ url, name }, i) => (
-                    <li key={i}>
+                    <li key={i} className={activeSection === url.replace('/#', '') ? 'active' : ''}>
                       <Link to={url}>{name}</Link>
                     </li>
                   ))}
@@ -249,7 +300,10 @@ const Nav = ({ isHome }) => {
                     navLinks &&
                     navLinks.map(({ url, name }, i) => (
                       <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
-                        <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
+                        <li
+                          key={i}
+                          className={activeSection === url.replace('/#', '') ? 'active' : ''}
+                          style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
                           <Link to={url}>{name}</Link>
                         </li>
                       </CSSTransition>

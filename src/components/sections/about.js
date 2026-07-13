@@ -19,6 +19,37 @@ const StyledAboutSection = styled.section`
   }
 `;
 const StyledText = styled.div`
+  .story-grid .story-card {
+    animation: liftIn 600ms var(--easing) both;
+  }
+
+  .story-grid .story-card:nth-child(1) {
+    animation-delay: 80ms;
+  }
+
+  .story-grid .story-card:nth-child(2) {
+    animation-delay: 160ms;
+  }
+
+  .story-grid .story-card:nth-child(3) {
+    animation-delay: 240ms;
+  }
+
+  .story-grid .story-card:nth-child(4) {
+    animation-delay: 320ms;
+  }
+
+  @keyframes liftIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .story-block {
     padding: 28px;
     border: 1px solid rgba(136, 146, 176, 0.14);
