@@ -75,6 +75,10 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: var(--navy);
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(87, 203, 255, 0.1), transparent 28%),
+      radial-gradient(circle at 80% 0%, rgba(100, 255, 218, 0.08), transparent 24%),
+      linear-gradient(180deg, rgba(2, 12, 27, 0.4) 0%, rgba(2, 12, 27, 0.1) 100%);
     color: var(--slate);
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
@@ -101,6 +105,33 @@ const GlobalStyle = createGlobalStyle`
         pointer-events: none;
         user-select: none;
       }
+    }
+  }
+
+  body:before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+    opacity: 0.35;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    body:before {
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, -12px, 0);
     }
   }
 

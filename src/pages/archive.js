@@ -11,6 +11,11 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledTableContainer = styled.div`
   margin: 100px -20px;
+  border: 1px solid rgba(136, 146, 176, 0.12);
+  border-radius: 24px;
+  background: rgba(10, 25, 47, 0.42);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
 
   @media (max-width: 768px) {
     margin: 50px -10px;
@@ -19,6 +24,7 @@ const StyledTableContainer = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 
     .hide-on-mobile {
       @media (max-width: 768px) {
@@ -27,9 +33,11 @@ const StyledTableContainer = styled.div`
     }
 
     tbody tr {
+      border-top: 1px solid rgba(136, 146, 176, 0.08);
+
       &:hover,
       &:focus {
-        background-color: var(--light-navy);
+        background-color: rgba(17, 34, 64, 0.8);
       }
     }
 
@@ -37,6 +45,7 @@ const StyledTableContainer = styled.div`
     td {
       padding: 10px;
       text-align: left;
+      vertical-align: top;
 
       &:first-child {
         padding-left: 20px;
@@ -85,8 +94,8 @@ const StyledTableContainer = styled.div`
       &.title {
         padding-top: 15px;
         padding-right: 20px;
-        color: var(--lightest-slate);
-        font-size: var(--fz-xl);
+        color: var(--white);
+        font-size: var(--fz-lg);
         font-weight: 600;
         line-height: 1.25;
       }
@@ -100,6 +109,8 @@ const StyledTableContainer = styled.div`
         font-size: var(--fz-xxs);
         font-family: var(--font-mono);
         line-height: 1.5;
+        color: var(--light-slate);
+
         .separator {
           margin: 0 5px;
         }
@@ -125,6 +136,15 @@ const StyledTableContainer = styled.div`
           }
         }
       }
+    }
+
+    thead th {
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: var(--fz-xs);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(2, 12, 27, 0.35);
     }
   }
 `;

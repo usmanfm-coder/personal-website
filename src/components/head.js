@@ -31,15 +31,23 @@ const Head = ({ title, description, image }) => {
     defaultImage,
   } = site.siteMetadata;
 
+  const isHome = pathname === '/';
+  const pageTitle = title || (isHome ? 'Software Engineer & Product Builder' : defaultTitle);
+  const pageDescription =
+    description ||
+    (isHome
+      ? 'Usman Farooq builds polished, human-centered software experiences with strong product instincts and a love for craft.'
+      : defaultDescription);
+
   const seo = {
-    title: title || defaultTitle,
-    description: description || defaultDescription,
+    title: pageTitle,
+    description: pageDescription,
     image: `${siteUrl}${image || defaultImage}`,
     url: `${siteUrl}${pathname}`,
   };
 
   return (
-    <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>
+    <Helmet title={seo.title} defaultTitle={defaultTitle} titleTemplate={`%s | ${defaultTitle}`}>
       <html lang="en" />
 
       <meta name="description" content={seo.description} />

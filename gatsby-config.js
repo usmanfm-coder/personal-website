@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: 'Usman Farooq',
     description:
-      'Usman Farooq is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
+      'Usman Farooq is a software engineer and product builder focused on polished, human-centered digital experiences.',
     siteUrl: 'https://UsmanFarooq.com', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
   },

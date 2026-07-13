@@ -9,6 +9,10 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledProjectsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
 
   a {
     position: relative;
@@ -22,13 +26,24 @@ const StyledProject = styled.li`
   grid-gap: 10px;
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
+  padding: 1.5rem;
+  border: 1px solid rgba(136, 146, 176, 0.14);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(17, 34, 64, 0.78), rgba(10, 25, 47, 0.88));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px -36px rgba(2, 12, 27, 0.95);
+  transition: transform 0.25s var(--easing), border-color 0.25s var(--easing), box-shadow 0.25s var(--easing);
 
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.boxShadow};
+    padding: 0;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
   }
 
   &:not(:last-of-type) {
-    margin-bottom: 100px;
+    margin-bottom: 0;
 
     @media (max-width: 768px) {
       margin-bottom: 70px;
@@ -91,6 +106,12 @@ const StyledProject = styled.li`
     }
   }
 
+  &:hover {
+    border-color: rgba(100, 255, 218, 0.2);
+    box-shadow: 0 28px 70px -34px rgba(2, 12, 27, 1);
+    transform: translateY(-6px);
+  }
+
   .project-content {
     position: relative;
     grid-column: 1 / 7;
@@ -108,6 +129,8 @@ const StyledProject = styled.li`
       grid-column: 1 / -1;
       padding: 40px 40px 30px;
       z-index: 5;
+      background: linear-gradient(180deg, rgba(10, 25, 47, 0.5), rgba(10, 25, 47, 0.9));
+      border-radius: var(--border-radius);
     }
 
     @media (max-width: 480px) {
@@ -116,19 +139,21 @@ const StyledProject = styled.li`
   }
 
   .project-overline {
-    margin: 10px 0;
+    margin: 0 0 12px;
     color: var(--green);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
     font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   .project-title {
     color: var(--lightest-slate);
-    font-size: clamp(24px, 5vw, 28px);
+    font-size: clamp(28px, 4vw, 38px);
 
     @media (min-width: 768px) {
-      margin: 0 0 20px;
+      margin: 0 0 18px;
     }
 
     @media (max-width: 768px) {
@@ -155,11 +180,12 @@ const StyledProject = styled.li`
     ${({ theme }) => theme.mixins.boxShadow};
     position: relative;
     z-index: 2;
-    padding: 25px;
-    border-radius: var(--border-radius);
-    background-color: var(--light-navy);
+    padding: 26px;
+    border-radius: 18px;
+    background: rgba(35, 53, 84, 0.55);
     color: var(--light-slate);
     font-size: var(--fz-lg);
+    line-height: 1.65;
 
     @media (max-width: 768px) {
       padding: 20px 0;
@@ -196,6 +222,10 @@ const StyledProject = styled.li`
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
+      padding: 6px 10px;
+      border: 1px solid rgba(136, 146, 176, 0.16);
+      border-radius: 999px;
+      background: rgba(2, 12, 27, 0.18);
     }
 
     @media (max-width: 768px) {
@@ -219,6 +249,13 @@ const StyledProject = styled.li`
     a {
       ${({ theme }) => theme.mixins.flexCenter};
       padding: 10px;
+      color: var(--lightest-slate);
+      transition: var(--transition);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--green);
+      }
 
       &.external {
         svg {
