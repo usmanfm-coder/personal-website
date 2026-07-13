@@ -3,7 +3,7 @@ date: '2024-11-24'
 title: 'Software Engineer'
 company: 'Yelp'
 location: 'Remote'
-range: '2024 - 2025'
+range: 'Dec 2024 - Jun 2025'
 url: 'https://www.yelp.com/'
 ---
 - Full Stack engineer at Yelp building a world-class authentication experience for consumers (~178M users).
