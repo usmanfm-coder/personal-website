@@ -112,6 +112,24 @@ const StyledProject = styled.li`
     transform: translateY(-6px);
   }
 
+  &:nth-of-type(3n + 1) {
+    .project-image {
+      transform: rotate(-0.6deg);
+    }
+  }
+
+  &:nth-of-type(3n + 2) {
+    .project-image {
+      transform: rotate(0.8deg);
+    }
+  }
+
+  &:nth-of-type(3n + 3) {
+    .project-image {
+      transform: rotate(-0.3deg) scale(0.995);
+    }
+  }
+
   .project-content {
     position: relative;
     grid-column: 1 / 7;
@@ -283,6 +301,10 @@ const StyledProject = styled.li`
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    transform-origin: center;
+    transition: transform 0.25s var(--easing), box-shadow 0.25s var(--easing);
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
@@ -293,8 +315,10 @@ const StyledProject = styled.li`
     a {
       width: 100%;
       height: 100%;
-      background-color: var(--green);
-      border-radius: var(--border-radius);
+      background:
+        linear-gradient(135deg, rgba(100, 255, 218, 0.18), rgba(87, 203, 255, 0.14)),
+        var(--green);
+      border-radius: 20px;
       vertical-align: middle;
 
       &:hover,
@@ -320,15 +344,16 @@ const StyledProject = styled.li`
         bottom: 0;
         z-index: 3;
         transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
+        background: linear-gradient(180deg, rgba(2, 12, 27, 0.08), rgba(2, 12, 27, 0.38));
+        mix-blend-mode: multiply;
       }
     }
 
     .img {
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+      filter: grayscale(100%) contrast(1.05) brightness(85%);
+      transition: var(--transition);
 
       @media (max-width: 768px) {
         object-fit: cover;
@@ -338,6 +363,14 @@ const StyledProject = styled.li`
       }
     }
   }
+  `; 
+
+const SectionIntro = styled.p`
+  margin: 0;
+  max-width: 620px;
+  color: var(--light-slate);
+  font-size: clamp(var(--fz-lg), 2vw, var(--fz-xl));
+  line-height: 1.6;
 `;
 
 const Featured = () => {
@@ -387,6 +420,11 @@ const Featured = () => {
       <h2 className="numbered-heading" ref={revealTitle}>
         Some Things I’ve Built
       </h2>
+
+      <SectionIntro>
+        A curated set of projects that shows how I think about product, craft, and execution across
+        different surfaces.
+      </SectionIntro>
 
       <StyledProjectsGrid>
         {featuredProjects &&
