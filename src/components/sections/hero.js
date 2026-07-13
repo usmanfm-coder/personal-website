@@ -14,6 +14,8 @@ const StyledHeroSection = styled.section`
   height: 100vh;
   padding: 0;
   overflow: hidden;
+  --spotlight-x: 50%;
+  --spotlight-y: 35%;
 
   &:before,
   &:after {
@@ -26,11 +28,17 @@ const StyledHeroSection = styled.section`
   }
 
   &:before {
-    top: 12%;
-    right: -6%;
-    width: 18rem;
-    height: 18rem;
-    background: radial-gradient(circle, rgba(87, 203, 255, 0.24), rgba(87, 203, 255, 0));
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at var(--spotlight-x) var(--spotlight-y),
+      rgba(87, 203, 255, 0.16) 0%,
+      rgba(100, 255, 218, 0.08) 18%,
+      transparent 52%
+    );
+    filter: blur(8px);
   }
 
   &:after {
@@ -110,6 +118,12 @@ const StyledHeroSection = styled.section`
     transition: opacity 0.25s ease;
   }
 
+  .hero-stack {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
   @media (max-width: 900px) {
     .hero-orb {
       left: 70%;
@@ -180,6 +194,7 @@ const StyledHeroSection = styled.section`
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const heroRef = useRef(null);
   const orbRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -193,19 +208,28 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion || !orbRef.current) {
+    if (prefersReducedMotion || !heroRef.current || !orbRef.current) {
       return;
     }
 
+    const hero = heroRef.current;
     const orb = orbRef.current;
 
     const updateOrb = event => {
-      const x = (event.clientX / window.innerWidth) * 100;
-      const y = (event.clientY / window.innerHeight) * 100;
-      orb.style.transform = `translate3d(-50%, -50%, 0) translate(${(x - 50) * 0.12}px, ${(y - 50) * 0.12}px)`;
+      const rect = hero.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      const clampedX = Math.max(12, Math.min(88, x));
+      const clampedY = Math.max(12, Math.min(88, y));
+
+      hero.style.setProperty('--spotlight-x', `${clampedX}%`);
+      hero.style.setProperty('--spotlight-y', `${clampedY}%`);
+      orb.style.transform = `translate3d(-50%, -50%, 0) translate(${(clampedX - 50) * 0.12}px, ${(clampedY - 50) * 0.12}px)`;
     };
 
     const resetOrb = () => {
+      hero.style.setProperty('--spotlight-x', '50%');
+      hero.style.setProperty('--spotlight-y', '35%');
       orb.style.transform = 'translate3d(-50%, -50%, 0)';
     };
 
@@ -239,48 +263,50 @@ const Hero = () => {
   ];
 
   return (
-    <StyledHeroSection>
+    <StyledHeroSection ref={heroRef}>
       {!prefersReducedMotion && <div ref={orbRef} className="hero-orb" aria-hidden="true" />}
-      {prefersReducedMotion ? (
-        <>
-          {items.map((item, i) => (
-            <div key={i}>{item}</div>
-          ))}
-        </>
-      ) : (
-        <TransitionGroup component={null}>
-          {isMounted &&
-            items.map((item, i) => (
-              <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-              </CSSTransition>
+      <div className="hero-stack">
+        {prefersReducedMotion ? (
+          <>
+            {items.map((item, i) => (
+              <div key={i}>{item}</div>
             ))}
-        </TransitionGroup>
-      )}
+          </>
+        ) : (
+          <TransitionGroup component={null}>
+            {isMounted &&
+              items.map((item, i) => (
+                <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
+                  <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
+                </CSSTransition>
+              ))}
+          </TransitionGroup>
+        )}
 
-      <div className="hero-actions">
-        <a className="hero-link" href="#projects">
-          See selected work
-        </a>
-        <a className="hero-link secondary" href="#contact">
-          Start a conversation
-        </a>
+        <div className="hero-actions">
+          <a className="hero-link" href="#projects">
+            See selected work
+          </a>
+          <a className="hero-link secondary" href="#contact">
+            Start a conversation
+          </a>
+        </div>
+
+        <ul className="hero-stats" aria-label="Highlights">
+          <li className="hero-stat">
+            <span className="stat-number">10+ years</span>
+            <span className="stat-label">building products, teams, and systems</span>
+          </li>
+          <li className="hero-stat">
+            <span className="stat-number">Full stack</span>
+            <span className="stat-label">shipping across frontend, backend, and infra</span>
+          </li>
+          <li className="hero-stat">
+            <span className="stat-number">Product-led</span>
+            <span className="stat-label">focused on clarity, velocity, and craft</span>
+          </li>
+        </ul>
       </div>
-
-      <ul className="hero-stats" aria-label="Highlights">
-        <li className="hero-stat">
-          <span className="stat-number">10+ years</span>
-          <span className="stat-label">building products, teams, and systems</span>
-        </li>
-        <li className="hero-stat">
-          <span className="stat-number">Full stack</span>
-          <span className="stat-label">shipping across frontend, backend, and infra</span>
-        </li>
-        <li className="hero-stat">
-          <span className="stat-number">Product-led</span>
-          <span className="stat-label">focused on clarity, velocity, and craft</span>
-        </li>
-      </ul>
     </StyledHeroSection>
   );
 };
